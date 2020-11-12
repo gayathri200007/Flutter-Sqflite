@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         new Text(
-          "Sqflite App Login",
+          " Login",
           textScaleFactor: 2.0,
         ),
         new Form(
@@ -73,7 +73,11 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
                 padding: const EdgeInsets.all(20.0),
                 child: new TextFormField(
                   onSaved: (val) => _email = val,
-                  decoration: new InputDecoration(labelText: "Email"),
+                  decoration: new InputDecoration(labelText: "Name"),
+                  validator: (String _email){
+                    if (_email.isEmpty) return 'Enter your Name';
+                    else return null;
+                  },
                 ),
               ),
               new Padding(
@@ -81,6 +85,10 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
                 child: new TextFormField(
                   onSaved: (val) => _password = val,
                   decoration: new InputDecoration(labelText: "Password"),
+                  validator: (String _password) {
+                    if (_password.length !=8 && _password.isEmpty) return 'Password length should be 8';
+                    else return null;
+                  },
                 ),
               )
             ],
@@ -95,6 +103,7 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
     );
 
     return new Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: new AppBar(
         title: new Text("Login Page"),
       ),

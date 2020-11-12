@@ -12,7 +12,9 @@ class _RegisterPageState  extends State<RegisterPage> {
   bool _isLoading = false;
   final formKey = new GlobalKey<FormState>();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
-  String _name, _username, _password;
+  String _name, _username,gender,dept, _password;
+
+  int phno,age;
 
 
 
@@ -21,6 +23,7 @@ class _RegisterPageState  extends State<RegisterPage> {
     _ctx = context;
     var loginBtn = new RaisedButton(
       onPressed: _submit,
+
       child: new Text("Register"),
       color: Colors.green,
     );
@@ -30,7 +33,7 @@ class _RegisterPageState  extends State<RegisterPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         new Text(
-          "Sqflite App Login",
+          "Login",
           textScaleFactor: 2.0,
         ),
         new Form(
@@ -40,15 +43,25 @@ class _RegisterPageState  extends State<RegisterPage> {
               new Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: new TextFormField(
+                  keyboardType: TextInputType.text,
                   onSaved: (val) => _name = val,
                   decoration: new InputDecoration(labelText: "Name"),
+                  validator: (String name){
+                    if (name.isEmpty) return 'Enter your name';
+                    else return null;
+                  },
                 ),
               ),
               new Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: new TextFormField(
+
                   onSaved: (val) => _username = val,
-                  decoration: new InputDecoration(labelText: "Email"),
+                  decoration: new InputDecoration(labelText: "User Name"),
+                  validator: (String name){
+                    if (name.isEmpty) return 'Enter your name';
+                    else return null;
+                  },
                 ),
               ),
               new Padding(
@@ -56,8 +69,61 @@ class _RegisterPageState  extends State<RegisterPage> {
                 child: new TextFormField(
                   onSaved: (val) => _password = val,
                   decoration: new InputDecoration(labelText: "Password"),
+                  validator: (String _password) {
+                    if (_password.length !=8 && _password.isEmpty) return 'Password length should be 8';
+                    else return null;
+                  },
+
                 ),
-              )
+              ),
+              new Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: new TextFormField(
+                  keyboardType: TextInputType.text,
+                  onSaved: (val) => gender = val,
+                  decoration: new InputDecoration(labelText: "Gender"),
+                  validator: (String number) {
+                    if (number.length !=10) return 'Invalid mobile number';
+                    else return null;
+                  },
+                ),
+              ),
+              new Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: new TextFormField(
+                  keyboardType: TextInputType.number,
+                  onSaved: (val) => age = int.parse(val),
+                  decoration: new InputDecoration(labelText: "age"),
+                  validator: (String age){
+                    if (age.isEmpty) return 'Enter your age';
+                    else return null;
+                  },
+                ),
+              ),
+              new Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: new TextFormField(
+                  keyboardType: TextInputType.number,
+                  onSaved: (val) => phno = int.parse(val),
+                  decoration: new InputDecoration(labelText: "phone Number"),
+                  validator: (String phno) {
+                    if (phno.length !=10 && phno.isEmpty) return 'Invalid mobile number';
+                    else return null;
+                  },
+                ),
+              ),
+              new Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: new TextFormField(
+                  keyboardType: TextInputType.text,
+                  onSaved: (val) => dept = val,
+                  decoration: new InputDecoration(labelText: "Department"),
+                  validator: (String dept) {
+                    if (dept.isEmpty) return 'Invalid Department';
+                    else return null;
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -66,15 +132,18 @@ class _RegisterPageState  extends State<RegisterPage> {
     );
 
     return new Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: new AppBar(
         title: new Text("Register"),
       ),
       key: scaffoldKey,
-      body: new Container(
+      body: SingleChildScrollView(
+      child: new Container(
         child: new Center(
           child: loginForm,
         ),
       ),
+    )
     );
   }
 
@@ -96,6 +165,7 @@ class _RegisterPageState  extends State<RegisterPage> {
         db.saveUser(user);
         _isLoading = false;
         Navigator.of(context).pushNamed("/login");
+        if (formKey.currentState.validate()){}
       });
     }
   }

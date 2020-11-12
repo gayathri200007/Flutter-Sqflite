@@ -26,6 +26,9 @@ dependencies:
   sqflite: ^0.11.0
   path_provider: ^0.4.0
   http: ^0.12.0
+  font_awesome_flutter: ^8.2.0
+  line_awesome_icons: ^1.0.4+2
+  flutter_rating_bar: ^3.0.1+1
 
 dev_dependencies:
   flutter_test:

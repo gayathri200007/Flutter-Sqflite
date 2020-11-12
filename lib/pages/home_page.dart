@@ -1,20 +1,22 @@
-import 'dart:async';
-import 'dart:convert';
+/**import 'dart:async';
+import 'dart:convert';**/
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 
-Future<List<Photo>> fetchPhotos(http.Client client) async {
+
+/**Future<List<Photo>> fetchPhotos(http.Client client) async {
   final response =
       await client.get('https://jsonplaceholder.typicode.com/photos');
 
   // Use the compute function to run parsePhotos in a separate isolate.
   return compute(parsePhotos, response.body);
-}
+}**/
 
 // A function that converts a response body into a List<Photo>.
-List<Photo> parsePhotos(String responseBody) {
+/**List<Photo> parsePhotos(String responseBody) {
   final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
 
   return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
@@ -38,32 +40,147 @@ class Photo {
       thumbnailUrl: json['thumbnailUrl'] as String,
     );
   }
-}
+}**/
 
-void main() => runApp(HomePage());
+/**void main() => runApp(HomePage());**/
+class HomePage extends StatefulWidget {
+  HomePage({Key key, this.title}) : super(key: key);
 
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final appTitle = 'Home Page - Photos';
-
-  return new Scaffold(
-      body: new Center(
-        child: MyHomePage(title: appTitle),
-      ),
-    );
-  }
-}
-
-
-class MyHomePage extends StatelessWidget {
   final String title;
 
-  MyHomePage({Key key, this.title}) : super(key: key);
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+  final List<Widget>_children = [
+    /**pathomescreen(),
+    viewdoc(),
+    patprofile()**/
+
+  ];
+
+
+  void onTapped(int value) {
+    setState(() {
+      _selectedIndex = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _children[_selectedIndex] ,
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        currentIndex: _selectedIndex,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                LineAwesomeIcons.home,
+                size: 30.0,
+              ),
+              title: Text('1')),
+          BottomNavigationBarItem(
+              icon: Icon(
+                LineAwesomeIcons.book,
+                size: 30.0,
+              ),
+              title: Text('2')),
+          BottomNavigationBarItem(
+              icon: Icon(
+                LineAwesomeIcons.male,
+                size: 30.0,
+              ),
+              title: Text('3')),
+        ],
+        onTap: onTapped,
+      ),
+    );
+  }
+
+}
+
+/**class HomePage extends StatefulWidget {
+
+  int _selectedIndex = 0;
+  final List<Widget>_children = [
+  pathomescreen(),
+  viewdoc(),
+  patprofile()
+
+  ];
+
+
+  void onTapped(int value) {
+  setState(() {
+  _selectedIndex = value;
+  });
+  }
+  @override
+  Widget build(BuildContext context) {
+   /** final appTitle = 'Home Page - Photos';**/
+    return Scaffold(
+      body: _children[_selectedIndex] ,
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        currentIndex: _selectedIndex,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                LineAwesomeIcons.home,
+                size: 30.0,
+              ),
+              title: Text('1')),
+          BottomNavigationBarItem(
+              icon: Icon(
+                LineAwesomeIcons.book,
+                size: 30.0,
+              ),
+              title: Text('2')),
+          BottomNavigationBarItem(
+              icon: Icon(
+                LineAwesomeIcons.male,
+                size: 30.0,
+              ),
+              title: Text('3')),
+        ],
+        onTap: onTapped,
+      ),
+    );
+/** return new Scaffold(
+      body: new Center(
+        child: MyHomePage(title: appTitle),
+      ),
+    );**/
+  }
+}
+
+
+/**class MyHomePage extends StatefulWidget {
+  final String title;
+
+  MyHomePage({Key key, this.title}) : super(key: key);
+  int _selectedIndex = 0;
+  final List<Widget>_children = [
+    pathomescreen(),
+    viewdoc(),
+    patprofile()
+
+  ];
+
+
+  void onTapped(int value) {
+    setState(() {
+      _selectedIndex = value;
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+   /** return Scaffold(
       appBar: AppBar(
         title: Text(title),
       ),
@@ -77,11 +194,40 @@ class MyHomePage extends StatelessWidget {
               : Center(child: CircularProgressIndicator());
         },
       ),
+    );**/
+    return Scaffold(
+      body: _children[_selectedIndex] ,
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        currentIndex: _selectedIndex,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                LineAwesomeIcons.home,
+                size: 30.0,
+              ),
+              title: Text('1')),
+          BottomNavigationBarItem(
+              icon: Icon(
+                LineAwesomeIcons.book,
+                size: 30.0,
+              ),
+              title: Text('2')),
+          BottomNavigationBarItem(
+              icon: Icon(
+                LineAwesomeIcons.male,
+                size: 30.0,
+              ),
+              title: Text('3')),
+        ],
+        onTap: onTapped,
+      ),
     );
   }
-}
+}**/
 
-class PhotosList extends StatelessWidget {
+/**class PhotosList extends StatelessWidget {
   final List<Photo> photos;
 
   PhotosList({Key key, this.photos}) : super(key: key);
@@ -98,4 +244,4 @@ class PhotosList extends StatelessWidget {
       },
     );
   }
-}
+}**/  **/

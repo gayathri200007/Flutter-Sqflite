@@ -7,7 +7,7 @@ void main() => runApp(MyApp());
 
 final routes = {
   '/login': (BuildContext context) => new LoginPage(),
-  '/home': (BuildContext context) => new HomePage(),
+  '/home': (BuildContext context) =>  HomePage(),
   '/register': (BuildContext context) => new RegisterPage(),
   '/': (BuildContext context) => new LoginPage(),
 };
